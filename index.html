@@ -8,232 +8,309 @@
 <meta property="og:title" content="Hashaam Shahid — WhatsApp &amp; back-office automation">
 <meta property="og:description" content="Order bots, automated reporting, and the manual work that eats your team's day. Fixed scope, fixed price.">
 <meta property="og:type" content="website">
+<meta name="theme-color" content="#080C12">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;500;600&display=swap">
 <style>
 :root{
-  --bg:#F2F0EB; --surface:#FFFFFF; --sunk:#E8E5DE; --band:#14181C;
-  --ink:#14181C; --ink-2:#4B5560; --ink-3:#7E8892; --line:#DAD6CD;
-  --accent:#17624A; --accent-ink:#0F4A38; --accent-soft:#DCEAE3; --live:#1F7A5C; --on-accent:#FFFFFF;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#101316; --surface:#181C21; --sunk:#1E242A; --band:#05070A;
-  --ink:#ECEFF2; --ink-2:#A8B2BC; --ink-3:#727C87; --line:#252C33;
-  --accent:#4FBF97; --accent-ink:#6FD1AC; --accent-soft:#123027; --live:#4FBF97; --on-accent:#06120D;
-  color-scheme:dark;
-}}
-:root[data-theme="dark"]{
-  --bg:#101316; --surface:#181C21; --sunk:#1E242A; --band:#05070A;
-  --ink:#ECEFF2; --ink-2:#A8B2BC; --ink-3:#727C87; --line:#252C33;
-  --accent:#4FBF97; --accent-ink:#6FD1AC; --accent-soft:#123027; --live:#4FBF97; --on-accent:#06120D;
+  --bg:#080C12;
+  --surface:#0E141C;
+  --surface-2:#131B25;
+  --line:#1E2936;
+  --line-2:#2B3A4B;
+  --ink:#EAF0F6;
+  --ink-2:#93A4B6;
+  --ink-3:#5E7085;
+  --flame:#FF6B2C;
+  --flame-2:#FF8A52;
+  --flame-dim:#4A2314;
+  --on-flame:#0A0500;
+  --display:"Chakra Petch",system-ui,sans-serif;
+  --sans:"Sora",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
-h1,h2,h3{margin:0;text-wrap:balance;font-weight:400}
-h1{font-family:var(--serif);font-size:clamp(38px,6.6vw,68px);line-height:1.03;letter-spacing:-.02em}
-h2{font-family:var(--serif);font-size:clamp(28px,4vw,40px);line-height:1.1;letter-spacing:-.015em}
-h3{font-size:18px;font-weight:600;letter-spacing:-.01em}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")}
+h1,h2,h3,h4{margin:0;font-family:var(--display);font-weight:600;text-wrap:balance;letter-spacing:-.015em}
+h1{font-size:clamp(40px,7.2vw,82px);line-height:.98;font-weight:700;letter-spacing:-.03em}
+h2{font-size:clamp(28px,4.4vw,46px);line-height:1.04;letter-spacing:-.025em}
+h3{font-size:20px}
 p{margin:0}
 a{color:inherit}
-.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
-.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:var(--on-accent);text-decoration:none;
-  border-radius:8px;padding:13px 20px;font-weight:600;font-size:15px;border:0;transition:filter .15s}
-.btn:hover{filter:brightness(1.12)}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--ink-3);filter:none}
+.wrap{max-width:1140px;margin:0 auto;padding-inline:20px;position:relative;z-index:2}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--flame)}
+.eyebrow.q{color:var(--ink-3)}
+.ln{display:block}
+.flame{color:var(--flame)}
 
-/* nav */
-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.navin{display:flex;align-items:center;gap:20px;height:62px}
-.logo{font-family:var(--serif);font-size:21px;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
-.logo span{color:var(--accent-ink)}
-.navlinks{display:flex;gap:22px;margin-left:auto;font-size:14.5px}
-.navlinks a{color:var(--ink-2);text-decoration:none}
+.btn{position:relative;display:inline-flex;align-items:center;gap:9px;text-decoration:none;border:0;cursor:pointer;
+  border-radius:3px;padding:15px 24px;font-family:var(--display);font-weight:600;font-size:15px;
+  background:var(--flame);color:var(--on-flame);overflow:hidden;isolation:isolate;
+  transition:transform .18s cubic-bezier(.2,.7,.3,1),box-shadow .18s}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.5) 50%,transparent 80%);
+  transform:translateX(-120%);transition:transform .6s cubic-bezier(.3,.8,.3,1)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px -12px var(--flame)}
+.btn:hover::after{transform:translateX(120%)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line-2)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--flame);color:var(--flame)}
+.btn.ghost::after{display:none}
+:focus-visible{outline:2px solid var(--flame);outline-offset:3px}
+
+nav{position:sticky;top:0;z-index:40;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+nav.stuck{background:rgba(8,12,18,.8);backdrop-filter:blur(14px) saturate(140%);border-bottom-color:var(--line)}
+.navin{display:flex;align-items:center;gap:22px;height:70px;padding-top:env(safe-area-inset-top,0px)}
+.logo{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:.02em;text-decoration:none;
+  display:flex;align-items:center;gap:10px;white-space:nowrap}
+.logo i{width:9px;height:9px;background:var(--flame);display:block;transform:rotate(45deg);flex:none;
+  box-shadow:0 0 14px var(--flame)}
+.navlinks{display:flex;gap:26px;margin-left:auto;font-size:13px;font-family:var(--mono);letter-spacing:.04em}
+.navlinks a{color:var(--ink-3);text-decoration:none;position:relative;padding-block:4px;transition:color .2s}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--flame);
+  transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.2,.7,.3,1)}
 .navlinks a:hover{color:var(--ink)}
-@media (max-width:760px){.navlinks{display:none}}
+.navlinks a:hover::after{transform:scaleX(1)}
+@media (max-width:820px){.navlinks{display:none}}
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:left;
+  background:linear-gradient(90deg,var(--flame),var(--flame-2));z-index:50}
 
-/* hero */
-.hero{padding-block:clamp(52px,9vw,104px) clamp(40px,6vw,72px)}
-.hero .lead{font-size:clamp(17px,2.2vw,20px);color:var(--ink-2);max-width:56ch;margin-top:22px}
-.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-.avail{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-top:26px}
-.avail i{width:7px;height:7px;border-radius:50%;background:var(--live);box-shadow:0 0 0 3px var(--accent-soft)}
+.hero{position:relative;min-height:clamp(560px,86vh,860px);display:flex;align-items:center;
+  padding-block:clamp(48px,8vw,88px) clamp(56px,9vw,104px);overflow:hidden}
+#grid3d{position:absolute;inset:0;width:100%;height:100%;z-index:0;display:block}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(112% 82% at 8% 30%,transparent 34%,rgba(8,12,18,.86) 78%,var(--bg) 97%)}
+.hero .wrap{z-index:2}
+.hero h1{margin-top:22px;max-width:16ch}
+.hero .lead{font-size:clamp(16.5px,1.9vw,19.5px);color:var(--ink-2);max-width:54ch;margin-top:26px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:13px;margin-top:36px}
+.avail{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:var(--ink-2);margin-top:30px}
+.avail i{width:7px;height:7px;border-radius:50%;background:var(--flame);flex:none;position:relative}
+.avail i::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1px solid var(--flame);opacity:.55;
+  animation:pulse 2.6s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.55);opacity:.8}100%{transform:scale(1.5);opacity:0}}
 
-/* band of facts */
-.band{background:var(--band);color:#E9EDF0;padding-block:34px;margin-block:8px}
-.bandgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
-@media (max-width:760px){.bandgrid{grid-template-columns:repeat(2,1fr);gap:22px}}
-.fact b{display:block;font-family:var(--serif);font-size:clamp(26px,3.6vw,36px);line-height:1;color:#fff}
-.fact span{display:block;font-size:13px;color:#9AA6B0;margin-top:7px;line-height:1.45}
+.band{border-block:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--bg));position:relative;z-index:2}
+.bandgrid{display:grid;grid-template-columns:repeat(4,1fr)}
+@media (max-width:860px){.bandgrid{grid-template-columns:repeat(2,1fr)}}
+.fact{padding:30px 26px;border-right:1px solid var(--line);position:relative;overflow:hidden}
+.fact:last-child{border-right:0}
+@media (max-width:860px){
+  .fact{padding:24px 18px}
+  .fact:nth-child(2n){border-right:0}
+  .fact:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+.fact b{display:block;font-family:var(--display);font-size:clamp(24px,3.5vw,36px);line-height:1;font-weight:700;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.fact span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:9px;line-height:1.5}
+.fact::before{content:"";position:absolute;left:0;top:0;width:100%;height:1px;background:var(--flame);
+  transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.3,1)}
+.fact.in::before{transform:scaleX(1)}
 
-section{padding-block:clamp(54px,8vw,86px)}
-.sechead{max-width:60ch;margin-bottom:38px}
-.sechead p{color:var(--ink-2);margin-top:14px}
+section{padding-block:clamp(64px,9vw,112px);position:relative;z-index:2}
+.sechead{max-width:58ch;margin-bottom:44px}
+.sechead h2{margin-top:16px}
+.sechead p{color:var(--ink-2);margin-top:18px}
 
-/* offers */
-.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media (max-width:900px){.offers{grid-template-columns:1fr}}
-.offer{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px 24px;display:flex;flex-direction:column}
-.offer.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
-.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);
-  background:var(--accent-soft);border-radius:4px;padding:3px 7px;align-self:flex-start;margin-bottom:14px}
-.offer h3{margin-bottom:8px}
+.tilt{transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+.tilt .lift-sm{transform:translateZ(16px)}
+.sheen{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s;z-index:1;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(255,107,44,.13),transparent 62%)}
+.tilt:hover .sheen{opacity:1}
+
+.offers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;perspective:1400px}
+@media (max-width:980px){.offers{grid-template-columns:1fr;perspective:none}}
+.offer{position:relative;background:linear-gradient(170deg,var(--surface-2),var(--surface));
+  border:1px solid var(--line);border-radius:6px;padding:30px 26px;display:flex;flex-direction:column}
+.offer.feat{border-color:var(--flame-dim);box-shadow:0 0 0 1px var(--flame-dim),0 30px 70px -50px var(--flame)}
+.offer>*{position:relative;z-index:2}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--flame);
+  border:1px solid var(--flame-dim);border-radius:2px;padding:4px 9px;align-self:flex-start;margin-bottom:18px}
+.offer h3{margin-bottom:10px}
 .offer .what{color:var(--ink-2);font-size:14.5px}
-.price{font-family:var(--mono);font-size:14px;color:var(--ink);margin:18px 0 4px;padding-top:16px;border-top:1px solid var(--line)}
-.price b{font-size:20px;font-weight:500}
-.price em{font-style:normal;color:var(--ink-3);font-size:12.5px;display:block;margin-top:2px}
-.offer ul{list-style:none;padding:0;margin:16px 0 22px;display:grid;gap:9px;font-size:14.5px;color:var(--ink-2)}
-.offer li{display:grid;grid-template-columns:16px 1fr;gap:9px}
-.offer li::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--accent);margin-top:8px}
+.price{font-family:var(--mono);margin:22px 0 6px;padding-top:20px;border-top:1px solid var(--line)}
+.price b{font-size:21px;font-weight:500;color:var(--ink)}
+.price em{font-style:normal;color:var(--ink-3);font-size:11.5px;display:block;margin-top:5px;line-height:1.5}
+.offer ul{list-style:none;padding:0;margin:20px 0 26px;display:grid;gap:11px;font-size:14.5px;color:var(--ink-2)}
+.offer li{display:grid;grid-template-columns:14px 1fr;gap:10px}
+.offer li::before{content:"";width:6px;height:6px;background:var(--flame);margin-top:9px;transform:rotate(45deg)}
 .offer .btn{margin-top:auto;justify-content:center}
 
-/* case study */
-.cs{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.cshead{padding:28px 28px 0}
-@media (max-width:640px){.cshead{padding:22px 20px 0}}
-.csmeta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px}
+.cs{position:relative;background:linear-gradient(165deg,var(--surface-2),var(--surface));border:1px solid var(--line);
+  border-radius:8px;overflow:hidden}
+.cs>*{position:relative;z-index:2}
+.cshead{padding:34px 34px 0}
+@media (max-width:640px){.cshead{padding:24px 20px 0}}
+.csmeta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:20px}
 .csmeta .tag{margin:0}
-.csmeta .live{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
-.cs h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3.4vw,32px);line-height:1.12;letter-spacing:-.015em}
-.cs .sum{color:var(--ink-2);margin-top:14px;max-width:62ch}
-.csnums{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:26px}
-@media (max-width:640px){.csnums{grid-template-columns:1fr}}
-.csnum{padding:22px 28px;border-right:1px solid var(--line)}
+.csmeta .live{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.08em}
+.cs h3{font-size:clamp(23px,3.2vw,34px);line-height:1.08;font-weight:700;letter-spacing:-.025em}
+.cs .sum{color:var(--ink-2);margin-top:18px;max-width:64ch}
+.csnums{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:32px}
+@media (max-width:700px){.csnums{grid-template-columns:1fr}}
+.csnum{padding:26px 34px;border-right:1px solid var(--line)}
 .csnum:last-child{border-right:0}
-@media (max-width:640px){.csnum{padding:18px 20px;border-right:0;border-bottom:1px solid var(--line)}.csnum:last-child{border-bottom:0}}
-.csnum b{display:block;font-family:var(--serif);font-size:clamp(22px,3vw,30px);line-height:1.05}
-.csnum span{display:block;font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.45}
-.csbody{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+@media (max-width:700px){.csnum{padding:20px;border-right:0;border-bottom:1px solid var(--line)}.csnum:last-child{border-bottom:0}}
+.csnum b{display:block;font-family:var(--display);font-size:clamp(23px,3.1vw,32px);line-height:1.02;font-weight:700;
+  letter-spacing:-.02em}
+.csnum.was b{color:var(--ink-3)}
+.csnum.now b{color:var(--flame)}
+.csnum span{display:block;font-size:12.5px;color:var(--ink-3);margin-top:8px;line-height:1.5}
+.csbody{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
 @media (max-width:820px){.csbody{grid-template-columns:1fr}}
-.csbody>div{padding:24px 28px;border-right:1px solid var(--line)}
+.csbody>div{padding:28px 34px;border-right:1px solid var(--line)}
 .csbody>div:last-child{border-right:0}
-@media (max-width:820px){.csbody>div{border-right:0;border-bottom:1px solid var(--line);padding:22px 20px}.csbody>div:last-child{border-bottom:0}}
-.csbody h4{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px}
-.csbody ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;font-size:14.5px;color:var(--ink-2)}
-.csbody li{display:grid;grid-template-columns:16px 1fr;gap:9px}
-.csbody li::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--accent);margin-top:8px}
-.csfoot{padding:20px 28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-@media (max-width:640px){.csfoot{padding:18px 20px}}
-.csfoot .note{font-size:13px;color:var(--ink-3);max-width:52ch}
+@media (max-width:820px){.csbody>div{border-right:0;border-bottom:1px solid var(--line);padding:22px 20px}
+  .csbody>div:last-child{border-bottom:0}}
+.csbody h4{font-family:var(--mono);font-size:10.5px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 16px}
+.csbody ul{list-style:none;padding:0;margin:0;display:grid;gap:12px;font-size:14.5px;color:var(--ink-2)}
+.csbody li{display:grid;grid-template-columns:14px 1fr;gap:10px}
+.csbody li::before{content:"";width:6px;height:6px;margin-top:9px;transform:rotate(45deg)}
+.csbody .old li::before{background:var(--ink-3)}
+.csbody .new li::before{background:var(--flame)}
+.csfoot{padding:24px 34px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:18px;align-items:center;
+  justify-content:space-between}
+@media (max-width:640px){.csfoot{padding:20px}}
+.csfoot .note{font-size:12.5px;color:var(--ink-3);max-width:50ch;line-height:1.6}
 
-/* process */
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
-@media (max-width:820px){.steps{grid-template-columns:1fr}}
-.stp{padding:26px 24px;border-right:1px solid var(--line)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:6px;overflow:hidden;
+  background:var(--surface)}
+@media (max-width:880px){.steps{grid-template-columns:1fr}}
+.stp{padding:32px 28px;border-right:1px solid var(--line);transition:background .3s}
 .stp:last-child{border-right:0}
-@media (max-width:820px){.stp{border-right:0;border-bottom:1px solid var(--line)}.stp:last-child{border-bottom:0}}
-.stp .n{font-family:var(--mono);font-size:12px;color:var(--accent-ink);letter-spacing:.1em}
-.stp h3{margin:10px 0 7px}
+.stp:hover{background:var(--surface-2)}
+@media (max-width:880px){.stp{border-right:0;border-bottom:1px solid var(--line)}.stp:last-child{border-bottom:0}}
+.stp .n{font-family:var(--mono);font-size:11px;color:var(--flame);letter-spacing:.2em}
+.stp h3{margin:14px 0 10px;font-size:19px}
 .stp p{font-size:14.5px;color:var(--ink-2)}
 
-/* about */
-.about{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:start}
-@media (max-width:860px){.about{grid-template-columns:1fr;gap:30px}}
-.about p+p{margin-top:14px}
+.about{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:start}
+@media (max-width:900px){.about{grid-template-columns:1fr;gap:34px}}
 .about p{color:var(--ink-2)}
-.cvcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
-.cvcard h3{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
-.cvrow{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+.about p+p{margin-top:16px}
+.cvcard{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:26px;overflow:hidden}
+.cvcard>*{position:relative;z-index:2}
+.cvcard h4{font-size:10.5px;font-family:var(--mono);font-weight:400;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:18px}
+.cvrow{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--line);font-size:13.5px}
 .cvrow:last-child{border-bottom:0}
-.cvrow span{color:var(--ink-2)}
-.cvrow b{font-weight:500;text-align:right}
+.cvrow span{color:var(--ink-3)}
+.cvrow b{font-weight:500;text-align:right;font-family:var(--mono);font-size:13px}
 
-/* faq */
-.faq{display:grid;gap:0;border-top:1px solid var(--line)}
+.faq{border-top:1px solid var(--line)}
 details{border-bottom:1px solid var(--line)}
-summary{cursor:pointer;padding:18px 0;font-weight:600;font-size:16.5px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary{cursor:pointer;padding:22px 0;font-family:var(--display);font-weight:600;font-size:17px;list-style:none;
+  display:flex;justify-content:space-between;gap:18px;align-items:center;transition:color .2s}
+summary:hover{color:var(--flame)}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";font-family:var(--mono);color:var(--ink-3);font-size:20px;flex:none}
-details[open] summary::after{content:"\2212"}
-details p{padding-bottom:20px;color:var(--ink-2);max-width:68ch;font-size:15px}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+summary .ico{font-family:var(--mono);color:var(--flame);font-size:19px;flex:none;transition:transform .3s}
+details[open] summary .ico{transform:rotate(45deg)}
+details p{padding-bottom:24px;color:var(--ink-2);max-width:68ch;font-size:15px}
 
-/* contact */
-.contact{background:var(--band);color:#E9EDF0;border-radius:16px;padding:clamp(30px,5vw,54px);margin-bottom:clamp(54px,8vw,86px)}
-.contact h2{color:#fff}
-.contact p{color:#9AA6B0;margin-top:14px;max-width:52ch}
-.clist{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.clist a{display:inline-flex;align-items:center;gap:9px;text-decoration:none;border:1px solid #2B333B;border-radius:8px;
-  padding:12px 18px;font-size:15px;color:#E9EDF0}
-.clist a:hover{border-color:#4A555F}
-.clist a.wa{background:var(--accent);border-color:var(--accent);color:var(--on-accent);font-weight:600}
-footer{border-top:1px solid var(--line);padding-block:26px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
-  font-size:13.5px;color:var(--ink-3)}
+.contact{position:relative;border:1px solid var(--line);border-radius:8px;padding:clamp(32px,5.5vw,62px);overflow:hidden;
+  background:linear-gradient(150deg,var(--surface-2),var(--bg) 70%)}
+.contact::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 120% at 88% 8%,rgba(255,107,44,.11),transparent 62%)}
+.contact>*{position:relative;z-index:2}
+.contact h2{margin-top:16px;max-width:18ch}
+.contact>p{color:var(--ink-2);margin-top:18px;max-width:52ch}
+.clist{display:flex;flex-wrap:wrap;gap:13px;margin-top:34px}
+.clist a{display:inline-flex;align-items:center;gap:10px;text-decoration:none;border-radius:3px;padding:14px 20px;
+  font-size:14px;font-family:var(--mono);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--line-2);transition:all .2s}
+.clist a:hover{color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink-3)}
+.clist a.wa{background:var(--flame);color:var(--on-flame);box-shadow:none;font-family:var(--display);font-weight:600;font-size:15px}
+.clist a.wa:hover{transform:translateY(-2px);box-shadow:0 12px 34px -14px var(--flame);color:var(--on-flame)}
+footer{border-top:1px solid var(--line);padding-block:30px;display:flex;flex-wrap:wrap;gap:14px;
+  justify-content:space-between;font-size:12px;color:var(--ink-3);font-family:var(--mono)}
 footer a{color:var(--ink-2);text-decoration:none}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+footer a:hover{color:var(--flame)}
+
+[data-anim]{opacity:1}
+.js [data-anim]{opacity:0;transform:translateY(26px);
+  transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.js [data-anim].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .js [data-anim]{opacity:1!important;transform:none!important}
+}
 </style>
 </head>
 <body>
 
-<nav>
+<div class="progress" id="progress"></div>
+
+<nav id="nav">
   <div class="wrap navin">
-    <a class="logo" href="/">Hashaam <span>Shahid</span></a>
+    <a class="logo" href="/"><i></i>HASHAAM SHAHID</a>
     <div class="navlinks">
       <a href="#work">Proof</a>
       <a href="#offers">What I build</a>
-      <a href="#how">How it works</a>
+      <a href="#how">Process</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
 </nav>
 
-<header class="hero wrap">
-  <p class="eyebrow">Automation &amp; AI systems &middot; Islamabad</p>
-  <h1>Your business already<br>runs on WhatsApp.<br><em>Make it run itself.</em></h1>
-  <p class="lead">Orders, enquiries, bookings and follow-ups sitting in one person's inbox until they get to them. I build the systems that handle that traffic automatically — and the back-office automations that stop your team retyping the same data three times.</p>
-  <div class="cta">
-    <a class="btn" href="https://wa.me/923009100171?text=Hi%20Hashaam%20%E2%80%94%20I%27d%20like%20to%20talk%20about%20automating%20something%20in%20my%20business." target="_blank" rel="noopener">Message me on WhatsApp</a>
-    <a class="btn ghost" href="#offers">See what I build</a>
+<header class="hero">
+  <canvas id="grid3d" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">Automation &amp; AI systems &middot; Islamabad</p>
+    <h1><span class="ln">Your business</span><span class="ln">already runs on</span><span class="ln">WhatsApp. Make it</span><span class="ln flame">run itself.</span></h1>
+    <p class="lead">Orders, enquiries and follow-ups sitting in one person's inbox until they get to them. I build the systems that handle that traffic automatically &mdash; and the back-office automations that stop your team retyping the same data three times.</p>
+    <div class="cta">
+      <a class="btn" href="https://wa.me/923009100171?text=Hi%20Hashaam%20%E2%80%94%20I%27d%20like%20to%20talk%20about%20automating%20something%20in%20my%20business." target="_blank" rel="noopener">Message me on WhatsApp</a>
+      <a class="btn ghost" href="#work">See what I&rsquo;ve built</a>
+    </div>
+    <p class="avail"><i></i> Taking on first automation clients now &mdash; early pricing reflects that</p>
   </div>
-  <p class="avail"><i></i> Taking on first automation clients now — early pricing reflects that</p>
 </header>
 
 <div class="band">
   <div class="wrap bandgrid">
-    <div class="fact"><b>2+ hrs &rarr; 5 min</b><span>Daily workload replaced on my own live product</span></div>
-    <div class="fact"><b>6+ yrs</b><span>Operations and project management</span></div>
-    <div class="fact"><b>4,000+</b><span>Applications processed through systems I built</span></div>
-    <div class="fact"><b>8+</b><span>Live products tracked on daily KPI dashboards</span></div>
+    <div class="fact" data-anim><b>2+ hrs <span class="flame">&rarr;</span> 5 min</b><span>Daily workload replaced on my own live product</span></div>
+    <div class="fact" data-anim><b><span data-count="6">0</span>+ yrs</b><span>Operations and project management</span></div>
+    <div class="fact" data-anim><b><span data-count="4000">0</span>+</b><span>Applications processed through systems I built</span></div>
+    <div class="fact" data-anim><b><span data-count="8">0</span>+</b><span>Live products tracked on daily KPI dashboards</span></div>
   </div>
 </div>
 
 <section id="work" class="wrap">
-  <div class="sechead">
+  <div class="sechead" data-anim>
     <p class="eyebrow">Proof</p>
     <h2>A daily job that now takes five minutes</h2>
     <p>Not client work &mdash; a product I built and run myself, to show what the method does when it is pointed at a real, repeating job.</p>
   </div>
 
-  <article class="cs">
+  <article class="cs tilt" data-tilt data-anim>
+    <div class="sheen"></div>
     <div class="cshead">
       <div class="csmeta">
         <span class="tag">Case study</span>
-        <span class="live">Live daily since launch &middot; miqyas.pk</span>
+        <span class="live">LIVE DAILY &middot; MIQYAS.PK</span>
       </div>
-      <h3>Miqyas: a news service that researches, writes and publishes itself</h3>
+      <h3 class="lift-sm">Miqyas: a news service that researches, writes and publishes itself</h3>
       <p class="sum">Every morning it reads Pakistani news sources, writes an original summary of each story in its own words, scores the likely economic, political and social impact, merges duplicate coverage of the same event, and publishes the finished site &mdash; without me opening a laptop.</p>
     </div>
 
     <div class="csnums">
-      <div class="csnum"><b>2+ hours</b><span>What the same work took by hand, every single day</span></div>
-      <div class="csnum"><b>Under 5 min</b><span>My actual daily effort now, and only to review</span></div>
+      <div class="csnum was"><b>2+ hours</b><span>What the same work took by hand, every single day</span></div>
+      <div class="csnum now"><b>Under 5 min</b><span>My actual daily effort now, and only to review</span></div>
       <div class="csnum"><b>9:00 AM</b><span>Runs itself on schedule, publishes with no prompt from me</span></div>
     </div>
 
     <div class="csbody">
       <div>
         <h4>What had to happen daily</h4>
-        <ul>
+        <ul class="old">
           <li>Read every source and spot which stories cover the same event</li>
           <li>Write an original summary of each one, never copied text</li>
           <li>Judge and tag the impact of each story across three measures</li>
@@ -242,7 +319,7 @@ footer a{color:var(--ink-2);text-decoration:none}
       </div>
       <div>
         <h4>What I built instead</h4>
-        <ul>
+        <ul class="new">
           <li>A scheduled agent that reads, writes, scores and files each morning</li>
           <li>Safe reruns: running twice in a day merges, it never overwrites</li>
           <li>Rules that flag risky stories for a human and admit low confidence</li>
@@ -258,17 +335,18 @@ footer a{color:var(--ink-2);text-decoration:none}
   </article>
 </section>
 
-<section id="offers" class="wrap">
-  <div class="sechead">
+<section id="offers" class="wrap" style="padding-top:0">
+  <div class="sechead" data-anim>
     <p class="eyebrow">What I build</p>
     <h2>Three ways to stop doing it by hand</h2>
     <p>Fixed scope, fixed price, agreed before anything starts. No hourly billing and no open-ended retainers until we both know the work is worth it.</p>
   </div>
 
   <div class="offers">
-    <div class="offer">
-      <span class="tag">Start here</span>
-      <h3>Automation audit</h3>
+    <div class="offer tilt" data-tilt data-anim>
+      <div class="sheen"></div>
+      <span class="tag lift-sm">Start here</span>
+      <h3 class="lift-sm">Automation audit</h3>
       <p class="what">One week. I sit with how your business actually runs, map every repeated task, and rank them by hours saved against cost to build.</p>
       <p class="price"><b>From PKR 50,000</b><em>Credited in full against any build you commission</em></p>
       <ul>
@@ -280,10 +358,11 @@ footer a{color:var(--ink-2);text-decoration:none}
       <a class="btn ghost" href="https://wa.me/923009100171?text=Hi%20Hashaam%20%E2%80%94%20I%27m%20interested%20in%20an%20automation%20audit." target="_blank" rel="noopener">Book an audit</a>
     </div>
 
-    <div class="offer feat">
-      <span class="tag">Most asked for</span>
-      <h3>WhatsApp order &amp; support bot</h3>
-      <p class="what">Your catalogue, order capture, confirmations and FAQs handled automatically — with a clean handover to a human the moment it matters.</p>
+    <div class="offer feat tilt" data-tilt data-anim>
+      <div class="sheen"></div>
+      <span class="tag lift-sm">Most asked for</span>
+      <h3 class="lift-sm">WhatsApp order &amp; support bot</h3>
+      <p class="what">Your catalogue, order capture, confirmations and FAQs handled automatically &mdash; with a clean handover to a human the moment it matters.</p>
       <p class="price"><b>From PKR 150,000</b><em>Plus monthly running cost &middot; official Meta API</em></p>
       <ul>
         <li>Built on the official WhatsApp Business API</li>
@@ -295,9 +374,10 @@ footer a{color:var(--ink-2);text-decoration:none}
       <a class="btn" href="https://wa.me/923009100171?text=Hi%20Hashaam%20%E2%80%94%20I%27d%20like%20a%20WhatsApp%20bot%20for%20my%20business." target="_blank" rel="noopener">Talk about a bot</a>
     </div>
 
-    <div class="offer">
-      <span class="tag">Back office</span>
-      <h3>Workflow automation</h3>
+    <div class="offer tilt" data-tilt data-anim>
+      <div class="sheen"></div>
+      <span class="tag lift-sm">Back office</span>
+      <h3 class="lift-sm">Workflow automation</h3>
       <p class="what">The invisible work: invoices retyped into spreadsheets, reports rebuilt every Monday, leads copied between tools, approvals chased over phone.</p>
       <p class="price"><b>From PKR 100,000</b><em>Priced per workflow, quoted after the audit</em></p>
       <ul>
@@ -312,15 +392,15 @@ footer a{color:var(--ink-2);text-decoration:none}
 </section>
 
 <section id="how" class="wrap" style="padding-top:0">
-  <div class="sechead">
-    <p class="eyebrow">How it works</p>
+  <div class="sechead" data-anim>
+    <p class="eyebrow">Process</p>
     <h2>Two weeks from first call to something running</h2>
   </div>
-  <div class="steps">
+  <div class="steps" data-anim>
     <div class="stp">
       <p class="n">01 / AUDIT</p>
       <h3>We find the expensive habit</h3>
-      <p>A week of watching how work really moves through your business — not how the org chart says it does. You get a ranked list and a fixed quote.</p>
+      <p>A week of watching how work really moves through your business &mdash; not how the org chart says it does. You get a ranked list and a fixed quote.</p>
     </div>
     <div class="stp">
       <p class="n">02 / BUILD</p>
@@ -337,58 +417,59 @@ footer a{color:var(--ink-2);text-decoration:none}
 
 <section id="about" class="wrap" style="padding-top:0">
   <div class="about">
-    <div>
+    <div data-anim>
       <p class="eyebrow">About</p>
-      <h2 style="margin-top:14px">I spent six years running operations before I automated any of it</h2>
-      <p style="margin-top:22px">Most automation gets sold by people who've never had to run the process they're replacing. I came at it the other way round. I've managed national-scale programmes, live product portfolios and cross-functional teams, and spent years building the dashboards, SOPs and reporting systems that kept them honest.</p>
-      <p>That's the useful part. Knowing which tool to use is easy and getting easier. Knowing which fifteen minutes of someone's day is worth removing — and which automation will quietly break the week after launch — comes from having been accountable for the work.</p>
+      <h2 style="margin-top:16px">I spent six years running operations before I automated any of it</h2>
+      <p style="margin-top:24px">Most automation gets sold by people who've never had to run the process they're replacing. I came at it the other way round. I've managed national-scale programmes, live product portfolios and cross-functional teams, and spent years building the dashboards, SOPs and reporting systems that kept them honest.</p>
+      <p>That's the useful part. Knowing which tool to use is easy and getting easier. Knowing which fifteen minutes of someone's day is worth removing &mdash; and which automation will quietly break the week after launch &mdash; comes from having been accountable for the work.</p>
       <p>I'm based in Islamabad and work with businesses here and across the Gulf. If automation isn't actually the answer for you, I'll say so on the first call.</p>
     </div>
-    <div class="cvcard">
-      <h3>Background</h3>
+    <div class="cvcard tilt" data-tilt data-anim>
+      <div class="sheen"></div>
+      <h4>Background</h4>
       <div class="cvrow"><span>Head of Operations</span><b>AGON Esports</b></div>
       <div class="cvrow"><span>Project Manager</span><b>Glitch (Pvt) Ltd</b></div>
       <div class="cvrow"><span>Game Designer</span><b>Game District</b></div>
-      <div class="cvrow"><span>Education</span><b>BS Engineering, COMSATS</b></div>
-      <div class="cvrow"><span>Based in</span><b>Islamabad, Pakistan</b></div>
+      <div class="cvrow"><span>Education</span><b>BS Eng, COMSATS</b></div>
+      <div class="cvrow"><span>Based in</span><b>Islamabad, PK</b></div>
       <div class="cvrow"><span>Working with</span><b>Pakistan &amp; Gulf</b></div>
     </div>
   </div>
 </section>
 
 <section class="wrap" style="padding-top:0">
-  <div class="sechead">
-    <p class="eyebrow">Questions</p>
+  <div class="sechead" data-anim>
+    <p class="eyebrow q">Questions</p>
     <h2>The things people ask first</h2>
   </div>
-  <div class="faq">
+  <div class="faq" data-anim>
     <details open>
-      <summary>Will this get my WhatsApp number banned?</summary>
-      <p>Not the way I build it. I use the official WhatsApp Business API through a Meta-approved provider. Plenty of cheaper automation runs on unofficial tools that scrape or spoof the app — those get numbers banned, and when your business runs on that number, that's not a small problem. If someone quotes you far less, this is usually why.</p>
+      <summary>Will this get my WhatsApp number banned?<span class="ico">+</span></summary>
+      <p>Not the way I build it. I use the official WhatsApp Business API through a Meta-approved provider. Plenty of cheaper automation runs on unofficial tools that scrape or spoof the app &mdash; those get numbers banned, and when your business runs on that number, that's not a small problem. If someone quotes you far less, this is usually why.</p>
     </details>
     <details>
-      <summary>Do I need to change the tools we already use?</summary>
+      <summary>Do I need to change the tools we already use?<span class="ico">+</span></summary>
       <p>Usually not. Most businesses here run on WhatsApp, Excel or Google Sheets, and maybe one accounting package. That's normally enough to automate against. I'd rather wire up what your team already knows than sell you a migration you didn't ask for.</p>
     </details>
     <details>
-      <summary>Is this just ChatGPT with extra steps?</summary>
-      <p>Some of it uses language models — reading a messy invoice, understanding an order written in Roman Urdu, drafting a reply. Plenty of it doesn't need AI at all and shouldn't use it. The audit tells you which is which. Anything that has to be exactly right every time gets built on rules, not a model's best guess.</p>
+      <summary>Is this just ChatGPT with extra steps?<span class="ico">+</span></summary>
+      <p>Some of it uses language models &mdash; reading a messy invoice, understanding an order written in Roman Urdu, drafting a reply. Plenty of it doesn't need AI at all and shouldn't use it. The audit tells you which is which. Anything that has to be exactly right every time gets built on rules, not a model's best guess.</p>
     </details>
     <details>
-      <summary>What does it cost to run each month?</summary>
+      <summary>What does it cost to run each month?<span class="ico">+</span></summary>
       <p>WhatsApp charges per conversation, and the rate depends on whether the customer or your business starts it. For most small businesses this lands in the low thousands of rupees monthly, but it scales with volume. I'll give you a real estimate from your actual message numbers during the audit, before you commit to anything.</p>
     </details>
     <details>
-      <summary>What if it breaks after you've handed it over?</summary>
-      <p>Thirty days of fixes are included after launch. After that you can hire me for changes as you need them, or your own team can maintain it — the documentation and the accounts are yours, in your name, not locked inside my agency account.</p>
+      <summary>What if it breaks after you've handed it over?<span class="ico">+</span></summary>
+      <p>Thirty days of fixes are included after launch. After that you can hire me for changes as you need them, or your own team can maintain it &mdash; the documentation and the accounts are yours, in your name, not locked inside my agency account.</p>
     </details>
   </div>
 </section>
 
 <div class="wrap">
-  <div class="contact" id="contact">
-    <p class="eyebrow" style="color:#7E8892">Get started</p>
-    <h2 style="margin-top:14px">Tell me what your team does twice</h2>
+  <div class="contact" id="contact" data-anim>
+    <p class="eyebrow">Get started</p>
+    <h2>Tell me what your team does twice</h2>
     <p>Message me with the one task that eats the most time in your week. I'll tell you straight whether it's worth automating, roughly what it would cost, and whether you need me at all.</p>
     <div class="clist">
       <a class="wa" href="https://wa.me/923009100171?text=Hi%20Hashaam%20%E2%80%94%20here%27s%20the%20task%20eating%20our%20time%3A" target="_blank" rel="noopener">WhatsApp &rarr; +92 300 9100171</a>
@@ -397,10 +478,11 @@ footer a{color:var(--ink-2);text-decoration:none}
     </div>
   </div>
   <footer>
-    <span>&copy; 2026 Hashaam Shahid Yousafzai &middot; Islamabad, Pakistan</span>
+    <span>&copy; 2026 HASHAAM SHAHID YOUSAFZAI &middot; ISLAMABAD</span>
     <span><a href="https://www.linkedin.com/in/hsyz/" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:hsyz2019@gmail.com">Email</a></span>
   </footer>
 </div>
 
+<script src="site.js"></script>
 </body>
 </html>
