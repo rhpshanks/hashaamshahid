@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/style.css">
+<style>.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
 </head>
 <body>
 
@@ -70,6 +71,53 @@
       </div>
   </div>
 </header>
+
+<section id="try" class="wrap">
+  <div class="sechead" data-anim>
+    <p class="eyebrow">Try it yourself</p>
+    <h2>Ask a dental clinic something. Right now.</h2>
+    <p>This is a working bot, not a video. Type a real question &mdash; timings, prices, where they are &mdash; or ask it to book you in. It answers from the clinic&rsquo;s own information, the way yours would answer from yours.</p>
+  </div>
+
+  <div class="trybox">
+    <div class="chatpanel" data-anim>
+      <div class="wahead">
+        <span class="waback">&lsaquo;</span>
+        <span class="waav" style="background:linear-gradient(145deg,#2AD3A5,#0E8C6C)">SD</span>
+        <span class="wameta">
+          <span class="waname">Smily Dental</span>
+          <span class="wastat"><i></i>online</span>
+        </span>
+      </div>
+      <div class="chatlog" id="botlog" role="log" aria-live="polite" aria-label="Conversation with the Smily Dental demo bot"></div>
+      <div class="botchips" id="botchips">
+        <button type="button" data-q="What are your timings?">What are your timings?</button>
+        <button type="button" data-q="How much is a cleaning?">How much is a cleaning?</button>
+        <button type="button" data-q="Are you open on Sunday?">Open on Sunday?</button>
+        <button type="button" data-q="Where are you located?">Where are you?</button>
+        <button type="button" data-q="I want to book an appointment">Book an appointment</button>
+        <button type="button" data-q="I have bad tooth pain">I have tooth pain</button>
+      </div>
+      <form class="botform" id="botform" autocomplete="off">
+        <label for="botinput" class="sr">Your message</label>
+        <input id="botinput" type="text" placeholder="Type a message&hellip;" maxlength="200">
+        <button type="submit" aria-label="Send message">&#10148;</button>
+      </form>
+    </div>
+
+    <div class="tryside" data-anim>
+      <h3>What just happened</h3>
+      <p>Every reply came from a small set of facts about the clinic &mdash; opening hours, price list, address, which dentist does what. No human was involved, and nothing you type leaves your browser.</p>
+      <ul class="trylist">
+        <li><span class="k">01</span><span><b>It reads what you meant</b>Ask &ldquo;kitna&rdquo;, &ldquo;how much&rdquo; or &ldquo;charges&rdquo; and you get the price list. Misspell it and it still understands.</span></li>
+        <li><span class="k">02</span><span><b>It sounds like a person</b>Short sentences, no menus, no &ldquo;press 1 for reception&rdquo;. It even mistypes occasionally and corrects itself.</span></li>
+        <li><span class="k">03</span><span><b>It finishes the job</b>Ask to book and it asks for a day, offers real slots, then confirms with the address and how to cancel.</span></li>
+        <li><span class="k">04</span><span><b>It knows when to stop</b>Ask something outside its knowledge and it says so, then tells you when a human will pick up. Guessing is what damages trust.</span></li>
+      </ul>
+      <p class="trynote">Built for this page, so it runs in your browser with a fixed set of answers. A real deployment sits on the official WhatsApp Business API, reads from your live calendar and price list, and hands over to your staff mid-conversation.</p>
+    </div>
+  </div>
+</section>
 
 <section id="work" class="wrap">
   <div class="sechead" data-anim>
@@ -271,6 +319,7 @@
   </footer>
 </div>
 
-<script src="site.js"></script>
+<script src="/site.js"></script>
+<script src="/bot.js"></script>
 </body>
 </html>
