@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case studies — Hashaam Shahid</title>
+<meta name="description" content="Miqyas: a Pakistani news service that researches, writes and publishes itself daily. Two hours of manual work a day replaced by a scheduled agent.">
+<meta property="og:title" content="Case studies — Hashaam Shahid">
+<meta property="og:description" content="How a two-hour daily job became a five-minute review.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#080C12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav id="nav">
+  <div class="wrap navin">
+    <a class="logo" href="/"><i></i>HASHAAM SHAHID</a>
+    <div class="navlinks">
+      <a href="/casestudies">Case studies</a>
+      <a href="/#offers">What I build</a>
+      <a href="/#how">Process</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="pagehead wrap">
+  <a class="backlink" href="/">&larr; BACK TO HOME</a>
+  <p class="eyebrow" style="margin-top:22px">Case study 01</p>
+  <h1>A two-hour daily job that now takes five minutes</h1>
+  <p class="lead">Miqyas reads Pakistani news every morning, writes an original summary of each story, scores its likely impact, and publishes a live website &mdash; with no daily work from me. I designed the system, directed the AI tools that built it, and set it up to maintain itself.</p>
+</header>
+
+<div class="wrap doc">
+  <main class="doc-main">
+    <h2>The problem worth solving</h2>
+    <p>There is too much news and too little time. A headline rarely tells you how much a story matters to your money, your government, or your daily life. The reader has to open ten articles to find the two that affect them.</p>
+    <p>Producing something that answers that daily is the expensive part. Reading every source, spotting which outlets are covering the same event, writing an original summary of each story, judging its impact, publishing, and confirming the update actually went live &mdash; that is over two hours of work, every single day, and it is mostly judgement rather than typing. Miss a day and the product is dead.</p>
+
+    <div class="callout">
+      <p><b>Why this is the right shape for automation.</b> The task is genuinely daily, it is mostly judgement, and it is expensive precisely because a person has to be there for it. That is the same shape as most of the back-office work I automate for businesses &mdash; the difference is only the subject matter.</p>
+    </div>
+
+    <h2>What it does</h2>
+    <p>Every headline card carries an AI-written summary in its own words, never copied text, alongside a link to the original story. Three impact badges &mdash; economic, political and social &mdash; each read positive, neutral or negative. Market relevance and confidence are shown as high, medium or low.</p>
+    <ul>
+      <li><b>Duplicate coverage merges.</b> When several outlets cover the same event, they collapse into one card with links to each.</li>
+      <li><b>Every colour has a matching shape</b> &mdash; circle, triangle, square &mdash; so the signals work for colour-blind readers.</li>
+      <li><b>Political lean is shown without colour</b> and names no party. Painting one side green and the other red would itself be a statement.</li>
+      <li><b>Around the cards</b> sit a trend chart, search, date filters, topic following, a methodology page, a weekly roundup and a public track record.</li>
+    </ul>
+
+    <h3>Decisions I made, and one I talked myself out of</h3>
+    <p>I first considered an indicator showing which party's supporters would like a story, then rejected it. The shipped alternative uses soft labels, names no party and carries no colour. In a Pakistani news context, an indicator like that would have read as taking a side no matter how carefully it was calculated &mdash; and the product's whole value rests on not appearing to.</p>
+    <p>Trust is earned by being open about method. So a methodology page explains exactly how the readings are produced, every badge has a "report this reading" action, risky stories are flagged for review by rule, and a public track-record page shows the AI's own statistics &mdash; including how often it is unsure.</p>
+
+    <h2>How I built it</h2>
+    <div class="phases">
+      <div class="phase">
+        <p class="n">01 / SPECIFICATION</p>
+        <h3>Write it down before building anything</h3>
+        <p>A technical document covering the platform choice, the six-indicator model, the visual palette, accessibility rules and editorial safeguards. Constraints on accuracy, neutrality and compliance were set before any code existed.</p>
+      </div>
+      <div class="phase">
+        <p class="n">02 / INTERFACE</p>
+        <h3>A phone-first reading surface</h3>
+        <p>React with Vite, built on design tokens and reusable components, light and dark themes, and a hand-built SVG trend chart with hover and touch tooltips.</p>
+      </div>
+      <div class="phase">
+        <p class="n">03 / THE PIPELINE</p>
+        <h3>A scheduled agent, no server to run</h3>
+        <p>Every morning at 9 AM Pakistan time it reads the sources' RSS feeds, checks each site's crawling rules permit it, reads and merges same-event coverage, writes original summaries, scores the indicators, attributes security claims to their stated source rather than presenting them as verified, flags stories for human review by rule, saves the day's data and pushes it.</p>
+      </div>
+      <div class="phase">
+        <p class="n">04 / DEPLOYMENT</p>
+        <h3>Publishing that needs no human</h3>
+        <p>Each push triggers a deployment, so the live site updates itself. A second agent runs weekly and writes an original roundup from the site's own accumulated data.</p>
+      </div>
+      <div class="phase">
+        <p class="n">05 / SCALE</p>
+        <h3>Built for an archive that keeps growing</h3>
+        <p>One data file per day, loaded page by page as the reader scrolls, with only the newest refreshed and older ones cached. Long lists render only what is on screen, so speed holds as the archive grows.</p>
+      </div>
+      <div class="phase">
+        <p class="n">06 / VERIFICATION</p>
+        <h3>Never trust the first answer</h3>
+        <p>Every change was tested in a real browser. That caught a list silently rendering zero cards, a chart label that dropped out twice where the first fix had only treated the symptom, duplicate IDs across days, duplicated headlines in the archive, and a one-day tally error found by recomputing totals from the raw data.</p>
+      </div>
+    </div>
+
+    <h3>The decision I am most pleased with</h3>
+    <p>Asked to backfill history so the archive looked fuller, I checked the sources' crawling rules, found no compliant way to get real past headlines, and let real history accumulate instead of inventing any. A product whose entire claim is trustworthy readings cannot open with fabricated data.</p>
+
+    <h2>How I direct AI tools</h2>
+    <p>My job was deciding what to build, why, and what "correct" means. The AI's job was execution, which I then checked. In practice that means four habits:</p>
+    <ul>
+      <li><b>Instructions as specifications.</b> The daily agent runs from a written task file with the edge cases handled: same-day reruns merge rather than replace, never fabricate detail, never touch another day's files.</li>
+      <li><b>Design for safe reruns.</b> Automation you can run twice without damage is automation you can trust unattended.</li>
+      <li><b>Ask for options, decide myself.</b> I had the AI lay out trade-offs &mdash; data architecture, palettes, native app versus wrapper &mdash; and made the calls.</li>
+      <li><b>Keep the guardrails inside the process.</b> Compliance checks, review flags and public documentation are part of the automation, not a promise around it.</li>
+    </ul>
+
+    <h3>An operations lesson that paid off</h3>
+    <p>After one push, the deployment didn't happen. Because each link in the chain could be checked separately &mdash; the commit visible in version control, the deployment list checked directly &mdash; I isolated the fault to the deployment trigger in minutes instead of guessing at it. Systems you can inspect one piece at a time are systems you can fix under pressure.</p>
+
+    <h2>Honest limitations</h2>
+    <div class="limits">
+      <ul>
+        <li>The readings are AI-generated and can be wrong. The track-record page exists so that is visible rather than hidden.</li>
+        <li>The "report this reading" action currently confirms in the interface only &mdash; there is no review queue behind it yet.</li>
+        <li>The daily-digest signup is a preview and stores nothing on a server.</li>
+        <li>Next: a real email digest, and a proper report-review workflow.</li>
+      </ul>
+    </div>
+
+    <h2>What this demonstrates</h2>
+    <p>Process mapping, specification writing, AI-directed development, scheduled automation, deployment pipelines, data-architecture thinking, quality verification, compliance awareness &mdash; and the part that matters most commercially: turning a repeating manual job into a system that runs without the person who built it.</p>
+  </main>
+
+  <aside class="aside">
+    <div class="asidecard">
+      <h4>The numbers</h4>
+      <p class="big">2+ hours</p>
+      <p class="cap">What this took by hand, every day</p>
+      <div class="rule"></div>
+      <p class="big now">Under 5 min</p>
+      <p class="cap">Daily effort now, and only to review</p>
+      <div class="rule"></div>
+      <p class="big">9:00 AM</p>
+      <p class="cap">Runs and publishes on schedule, unprompted</p>
+    </div>
+    <div class="asidecard">
+      <h4>Project</h4>
+      <p class="cap" style="margin-top:0">Built and run by me, not client work. Live daily.</p>
+      <div class="rule"></div>
+      <h4 style="margin-bottom:10px">Built with</h4>
+      <div class="chips">
+        <span>React</span><span>Vite</span><span>Scheduled agents</span><span>Git</span><span>Vercel</span><span>SVG charts</span>
+      </div>
+      <div class="rule"></div>
+      <a class="btn ghost" style="width:100%;justify-content:center" href="https://www.miqyas.pk/" target="_blank" rel="noopener">Visit miqyas.pk &nearr;</a>
+    </div>
+  </aside>
+</div>
+
+<div class="wrap">
+  <div class="endcta">
+    <div>
+      <p class="eyebrow">Your turn</p>
+      <h2 style="margin-top:14px">What does your team do every single day?</h2>
+      <p style="color:var(--ink-2);margin-top:16px;max-width:52ch">If it is daily, repetitive and eats real hours, it is worth an hour of conversation. I will tell you straight whether it is worth automating.</p>
+    </div>
+    <a class="btn" href="https://wa.me/923009100171?text=Hi%20Hashaam%20%E2%80%94%20I%20read%20the%20Miqyas%20case%20study.%20Here%27s%20the%20task%20eating%20our%20time%3A" target="_blank" rel="noopener">Message me on WhatsApp</a>
+  </div>
+  <footer>
+    <span>&copy; 2026 HASHAAM SHAHID YOUSAFZAI &middot; ISLAMABAD</span>
+    <span><a href="https://www.linkedin.com/in/hsyz/" target="_blank" rel="noopener">LinkedIn</a> &middot; <a href="mailto:me@hashaamshahid.com">Email</a></span>
+  </footer>
+</div>
+
+<script src="/site.js"></script>
+</body>
+</html>
