@@ -248,37 +248,82 @@ function pick(intent) {
   return typeof r === 'function' ? r() : r;
 }
 
+// the only slots the clinic actually has free
+const SLOTS = [
+  { label: '10:30 AM', mins: 10 * 60 + 30 },
+  { label: '1:00 PM', mins: 13 * 60 },
+  { label: '4:45 PM', mins: 16 * 60 + 45 }
+];
+function slotList(join) {
+  const l = SLOTS.map(s => s.label);
+  return l.slice(0, -1).join(', ') + ' ' + (join || 'or') + ' ' + l[l.length - 1];
+}
+function toMins(label) {
+  const m = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/.exec(label);
+  if (!m) return null;
+  let h = +m[1] % 12;
+  if (m[3] === 'PM') h += 12;
+  return h * 60 + (+m[2]);
+}
+function findSlot(label) {
+  const mins = toMins(label);
+  if (mins == null) return null;
+  // accept a near miss: "1pm" for the 1:00 PM slot, "10:30" for 10:30 AM
+  return SLOTS.find(s => Math.abs(s.mins - mins) <= 5) || null;
+}
+function offer(day) {
+  return 'Got it, ' + day + '. We have ' + slotList('and') + ' free. Which one?';
+}
+function confirm(day, slot) {
+  return '✅ Done — ' + day + ' at ' + slot.label + ' with Dr. Sana Tariq.\n\n' + KB.address +
+    '\n\nReply RESCHEDULE or CANCEL any time. I will send a reminder the morning of.';
+}
+function noSlot(asked, day) {
+  return 'Sorry, we do not have anything at ' + asked + (day ? ' on ' + day : '') +
+    '. The free slots are ' + slotList() + '. Would any of those work?';
+}
+
+// day and time already in hand, wherever the conversation was
+function bookingStep(day, time) {
+  if (day && time) {
+    const slot = findSlot(time);
+    if (!slot) { pendingDay = day; return noSlot(time, day); }
+    awaiting = null; pendingDay = null;
+    return confirm(day, slot);
+  }
+  if (day) { pendingDay = day; return offer(day); }
+  if (time) {
+    const slot = findSlot(time);
+    if (!slot) return noSlot(time, pendingDay);
+    if (!pendingDay) return 'That time works — which day would you like to come in?';
+    const d = pendingDay;
+    awaiting = null; pendingDay = null;
+    return confirm(d, slot);
+  }
+  return null;
+}
+
 function answer(text) {
   const day = findDay(text);
   const time = findTime(text);
-
-  if (awaiting === 'booking') {
-    if (day && time) {
-      awaiting = null; pendingDay = null;
-      return '✅ Done — ' + day + ' at ' + time + ' with Dr. Sana Tariq.\n\n' + KB.address +
-        '\n\nReply RESCHEDULE or CANCEL any time. I will send a reminder the morning of.';
-    }
-    if (day) {
-      pendingDay = day;
-      return 'Got it, ' + day + '. We have 10:30 AM, 1:00 PM and 4:45 PM free. Which one?';
-    }
-    if (time && pendingDay) {
-      const d = pendingDay;
-      awaiting = null; pendingDay = null;
-      return '✅ Done — ' + d + ' at ' + time + ' with Dr. Sana Tariq.\n\n' + KB.address +
-        '\n\nReply RESCHEDULE or CANCEL any time. I will send a reminder the morning of.';
-    }
-  }
-
   const intent = match(text);
-  if (intent) {
-    if (intent.sets === 'booking') awaiting = 'booking';
-    return pick(intent);
+
+  // "book me for monday at 1pm" carries the intent and the slot in one message
+  if (intent && intent.sets === 'booking') {
+    awaiting = 'booking';
+    return bookingStep(day, time) || pick(intent);
   }
+  // mid-booking, a bare day or time is an answer to our question
+  if (awaiting === 'booking') {
+    const step = bookingStep(day, time);
+    if (step) return step;
+  }
+  // a real question wins over a stray day word, so "open on sunday?" still answers
+  if (intent) return pick(intent);
+
   if (day || time) {
     awaiting = 'booking';
-    if (day) { pendingDay = day; return 'Got it, ' + day + '. We have 10:30 AM, 1:00 PM and 4:45 PM free. Which one?'; }
-    return 'Which day would you like to come in?';
+    return bookingStep(day, time);
   }
   return 'I am not sure I followed that one. I can help with timings, prices, where we are, our dentists, or booking you an appointment — which of those is it?\n\nOtherwise Dr. Sana picks up messages herself from 10 AM.';
 }
