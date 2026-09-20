@@ -1,7 +1,10 @@
 # hashaamshahid.com
 
-**Faucet & Sink** — a Machinations-style game economy simulator by Hashaam Shahid Yousafzai.
+Personal site for Hashaam Shahid Yousafzai — WhatsApp and back-office automation
+for businesses in Pakistan and the Gulf.
 
-Wire faucets, pools, sinks, converters and gates with formulas, then run the economy and watch the pools move.
+Static site, no build step. Deploys as-is on Vercel.
 
-Static site: `index.html` + `app.js`, no build step. Deploys as-is on Vercel.
+- `index.html` — the site
+- `flow/` — Faucet & Sink, a game economy simulator. Not linked from the site;
+  reachable directly at /flow/ for sharing privately.
