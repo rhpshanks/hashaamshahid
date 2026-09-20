@@ -175,32 +175,6 @@ function reveal() {
   setTimeout(() => items.forEach(el => el.classList.add('in')), 3000);
 }
 
-/* ------------------------------------------------------------------ counters */
-function counters() {
-  const els = Array.prototype.slice.call(document.querySelectorAll('[data-count]'));
-  if (!els.length) return;
-  const fmt = n => n >= 1000 ? n.toLocaleString() : String(n);
-  if (reduced || !('IntersectionObserver' in window)) {
-    els.forEach(el => { el.textContent = fmt(+el.dataset.count); });
-    return;
-  }
-  const io = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-      const el = entry.target, to = +el.dataset.count, t0 = performance.now(), dur = 1100;
-      (function run(now) {
-        const p = Math.min(1, (now - t0) / dur);
-        const e = 1 - Math.pow(1 - p, 3);
-        el.textContent = fmt(Math.round(to * e));
-        if (p < 1) requestAnimationFrame(run);
-      })(t0);
-      obs.unobserve(el);
-    });
-  }, { threshold: 0.5 });
-  els.forEach(el => io.observe(el));
-  setTimeout(() => els.forEach(el => { if (el.textContent === '0') el.textContent = fmt(+el.dataset.count); }), 3000);
-}
-
 /* ------------------------------------------------------------------ nav + progress */
 function chrome() {
   const nav = document.getElementById('nav');
@@ -224,6 +198,5 @@ function chrome() {
 terrain();
 tilt();
 reveal();
-counters();
 chrome();
 })();
