@@ -96,6 +96,35 @@ section{padding-block:clamp(54px,8vw,86px)}
 .offer li::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--accent);margin-top:8px}
 .offer .btn{margin-top:auto;justify-content:center}
 
+/* case study */
+.cs{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.cshead{padding:28px 28px 0}
+@media (max-width:640px){.cshead{padding:22px 20px 0}}
+.csmeta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:16px}
+.csmeta .tag{margin:0}
+.csmeta .live{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.cs h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,3.4vw,32px);line-height:1.12;letter-spacing:-.015em}
+.cs .sum{color:var(--ink-2);margin-top:14px;max-width:62ch}
+.csnums{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:26px}
+@media (max-width:640px){.csnums{grid-template-columns:1fr}}
+.csnum{padding:22px 28px;border-right:1px solid var(--line)}
+.csnum:last-child{border-right:0}
+@media (max-width:640px){.csnum{padding:18px 20px;border-right:0;border-bottom:1px solid var(--line)}.csnum:last-child{border-bottom:0}}
+.csnum b{display:block;font-family:var(--serif);font-size:clamp(22px,3vw,30px);line-height:1.05}
+.csnum span{display:block;font-size:13px;color:var(--ink-2);margin-top:6px;line-height:1.45}
+.csbody{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line)}
+@media (max-width:820px){.csbody{grid-template-columns:1fr}}
+.csbody>div{padding:24px 28px;border-right:1px solid var(--line)}
+.csbody>div:last-child{border-right:0}
+@media (max-width:820px){.csbody>div{border-right:0;border-bottom:1px solid var(--line);padding:22px 20px}.csbody>div:last-child{border-bottom:0}}
+.csbody h4{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px}
+.csbody ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;font-size:14.5px;color:var(--ink-2)}
+.csbody li{display:grid;grid-template-columns:16px 1fr;gap:9px}
+.csbody li::before{content:"";width:7px;height:7px;border-radius:2px;background:var(--accent);margin-top:8px}
+.csfoot{padding:20px 28px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+@media (max-width:640px){.csfoot{padding:18px 20px}}
+.csfoot .note{font-size:13px;color:var(--ink-3);max-width:52ch}
+
 /* process */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
 @media (max-width:820px){.steps{grid-template-columns:1fr}}
@@ -149,6 +178,7 @@ footer a{color:var(--ink-2);text-decoration:none}
   <div class="wrap navin">
     <a class="logo" href="/">Hashaam <span>Shahid</span></a>
     <div class="navlinks">
+      <a href="#work">Proof</a>
       <a href="#offers">What I build</a>
       <a href="#how">How it works</a>
       <a href="#about">About</a>
@@ -170,12 +200,63 @@ footer a{color:var(--ink-2);text-decoration:none}
 
 <div class="band">
   <div class="wrap bandgrid">
+    <div class="fact"><b>2+ hrs &rarr; 5 min</b><span>Daily workload replaced on my own live product</span></div>
     <div class="fact"><b>6+ yrs</b><span>Operations and project management</span></div>
     <div class="fact"><b>4,000+</b><span>Applications processed through systems I built</span></div>
     <div class="fact"><b>8+</b><span>Live products tracked on daily KPI dashboards</span></div>
-    <div class="fact"><b>2 cities</b><span>Multi-partner delivery, zero missed launches</span></div>
   </div>
 </div>
+
+<section id="work" class="wrap">
+  <div class="sechead">
+    <p class="eyebrow">Proof</p>
+    <h2>A daily job that now takes five minutes</h2>
+    <p>Not client work &mdash; a product I built and run myself, to show what the method does when it is pointed at a real, repeating job.</p>
+  </div>
+
+  <article class="cs">
+    <div class="cshead">
+      <div class="csmeta">
+        <span class="tag">Case study</span>
+        <span class="live">Live daily since launch &middot; miqyas.pk</span>
+      </div>
+      <h3>Miqyas: a news service that researches, writes and publishes itself</h3>
+      <p class="sum">Every morning it reads Pakistani news sources, writes an original summary of each story in its own words, scores the likely economic, political and social impact, merges duplicate coverage of the same event, and publishes the finished site &mdash; without me opening a laptop.</p>
+    </div>
+
+    <div class="csnums">
+      <div class="csnum"><b>2+ hours</b><span>What the same work took by hand, every single day</span></div>
+      <div class="csnum"><b>Under 5 min</b><span>My actual daily effort now, and only to review</span></div>
+      <div class="csnum"><b>9:00 AM</b><span>Runs itself on schedule, publishes with no prompt from me</span></div>
+    </div>
+
+    <div class="csbody">
+      <div>
+        <h4>What had to happen daily</h4>
+        <ul>
+          <li>Read every source and spot which stories cover the same event</li>
+          <li>Write an original summary of each one, never copied text</li>
+          <li>Judge and tag the impact of each story across three measures</li>
+          <li>Publish the site and confirm the update actually went live</li>
+        </ul>
+      </div>
+      <div>
+        <h4>What I built instead</h4>
+        <ul>
+          <li>A scheduled agent that reads, writes, scores and files each morning</li>
+          <li>Safe reruns: running twice in a day merges, it never overwrites</li>
+          <li>Rules that flag risky stories for a human and admit low confidence</li>
+          <li>Publishing wired to deploy automatically, so nothing waits on me</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="csfoot">
+      <p class="note">The same shape as most business automation: a task that is genuinely daily, mostly judgement, and expensive precisely because a person has to be there for it.</p>
+      <a class="btn ghost" href="https://www.miqyas.pk/" target="_blank" rel="noopener">See it running &nearr;</a>
+    </div>
+  </article>
+</section>
 
 <section id="offers" class="wrap">
   <div class="sechead">
