@@ -255,3 +255,75 @@ footer a:hover{color:var(--flame)}
   align-items:center;justify-content:space-between}
 .endcta h2{max-width:20ch}
 
+
+/* ---------- hero phone demo ---------- */
+.herogrid{display:grid;grid-template-columns:minmax(0,1.02fr) auto;gap:clamp(32px,5vw,64px);align-items:center}
+@media (max-width:1040px){.herogrid{grid-template-columns:1fr;gap:44px;justify-items:center}
+  .herotext{order:1;justify-self:start}.phonewrap{order:2}}
+.hero.haswide h1{font-size:clamp(34px,4.7vw,58px);max-width:14ch}
+.hero.haswide .lead{font-size:clamp(15.5px,1.5vw,17.5px);max-width:46ch}
+
+.phonewrap{display:flex;flex-direction:column;align-items:center;gap:14px;perspective:1600px}
+.phone{position:relative;width:308px;height:624px;border-radius:46px;flex:none;
+  background:linear-gradient(160deg,#2C3742,#141C24 42%,#0C1218);
+  padding:11px;box-shadow:0 48px 90px -40px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.055),
+    inset 0 1px 1px rgba(255,255,255,.12);
+  transform:rotateY(-13deg) rotateX(5deg) rotateZ(.6deg);
+  transform-style:preserve-3d;animation:float 7s ease-in-out infinite}
+@media (max-width:1040px){.phone{transform:rotateY(-6deg) rotateX(3deg)}}
+@media (max-width:420px){.phone{width:280px;height:582px;border-radius:42px}}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -13px}}
+.phone::after{content:"";position:absolute;inset:11px;border-radius:36px;pointer-events:none;z-index:6;
+  background:linear-gradient(128deg,rgba(255,255,255,.16),transparent 36%,transparent 74%,rgba(255,255,255,.05))}
+.screen{position:relative;width:100%;height:100%;border-radius:36px;overflow:hidden;background:#0B141A;
+  display:grid;grid-template-rows:auto minmax(0,1fr) auto}
+.notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);width:86px;height:23px;border-radius:14px;
+  background:#05090C;z-index:5}
+
+.wahead{background:#1F2C34;padding:34px 13px 11px;display:flex;align-items:center;gap:10px;position:relative;z-index:2}
+.waback{color:#8FA0AB;font-size:17px;line-height:1;flex:none}
+.waav{width:35px;height:35px;border-radius:50%;flex:none;display:grid;place-content:center;
+  background:linear-gradient(145deg,#2AA5F2,#1A6FA8);color:#fff;font-family:var(--display);font-size:13px;font-weight:700}
+.wameta{min-width:0}
+.waname{font-family:var(--sans);font-size:13.5px;font-weight:600;color:#E9EDEF;line-height:1.25;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wastat{font-size:10.5px;color:#25D366;line-height:1.3;display:flex;align-items:center;gap:5px}
+.wastat i{width:5px;height:5px;border-radius:50%;background:#25D366;display:block;flex:none}
+
+.wabody{padding:12px 11px 6px;overflow:hidden;display:flex;flex-direction:column;gap:7px;justify-content:flex-end;
+  background:#0B141A;
+  background-image:radial-gradient(rgba(255,255,255,.028) 1px,transparent 1.3px);background-size:17px 17px}
+.daystamp{align-self:center;background:#182229;color:#8FA0AB;font-size:9.5px;letter-spacing:.04em;
+  padding:4px 11px;border-radius:7px;margin-bottom:4px;font-family:var(--sans)}
+.bub{max-width:82%;padding:7px 10px 17px;border-radius:9px;font-size:12.6px;line-height:1.42;position:relative;
+  font-family:var(--sans);color:#E9EDEF;white-space:pre-line;word-break:break-word;
+  animation:pop .28s cubic-bezier(.2,.8,.3,1) both}
+@keyframes pop{from{opacity:0;transform:translateY(9px) scale(.96)}to{opacity:1;transform:none}}
+.bub.them{align-self:flex-start;background:#202C33;border-top-left-radius:2px}
+.bub.me{align-self:flex-end;background:#005C4B;border-top-right-radius:2px}
+.bub .ts{position:absolute;right:9px;bottom:4px;font-size:9px;color:rgba(233,237,239,.5);font-family:var(--sans)}
+.bub.me .ts{color:rgba(233,237,239,.62)}
+.bub .tick{color:#53BDEB;margin-left:2px}
+.bub b{font-weight:600}
+.typing{align-self:flex-start;background:#202C33;border-radius:9px;border-top-left-radius:2px;padding:11px 13px;
+  display:flex;gap:4px;animation:pop .2s both}
+.typing i{width:6px;height:6px;border-radius:50%;background:#8FA0AB;display:block;animation:blink 1.25s infinite}
+.typing i:nth-child(2){animation-delay:.18s}.typing i:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,60%,100%{opacity:.33;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+.wafoot{padding:8px 11px 13px;display:flex;align-items:center;gap:8px;background:#0B141A}
+.wafield{flex:1;background:#202C33;border-radius:18px;padding:8px 13px;font-size:11.5px;color:#66798A;
+  font-family:var(--sans)}
+.wasend{width:33px;height:33px;border-radius:50%;background:#00A884;flex:none;display:grid;place-content:center;
+  color:#0B141A;font-size:13px}
+.phonecap{font-family:var(--mono);font-size:10.5px;color:var(--ink-3);text-align:center;letter-spacing:.05em;
+  max-width:300px;line-height:1.6}
+.phonecap b{color:var(--flame);font-weight:500}
+@media (prefers-reduced-motion:reduce){.phone{animation:none}.bub,.typing{animation:none}}
+@media (max-width:1040px){
+  .hero{min-height:0;padding-block:28px clamp(40px,7vw,64px)}
+  .hero.haswide h1{font-size:clamp(32px,8vw,46px)}
+  .hero .lead{margin-top:20px}
+  .hero .cta{margin-top:26px}
+  .avail{margin-top:22px}
+}

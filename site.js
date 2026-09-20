@@ -195,7 +195,92 @@ function chrome() {
   update();
 }
 
+/* ------------------------------------------------------------------ hero chat demo
+   Alisa messages a dental clinic at 2am; the bot answers within the same minute. */
+function chatDemo() {
+  const box = document.getElementById('chat');
+  if (!box) return;
+
+  const SCRIPT = [
+    { who: 'me',  wait: 600,  ts: '2:14 AM',
+      text: 'Hi, do you have any appointment tomorrow? I have really bad toothache \u{1F623}' },
+    { who: 'bot', wait: 1400, ts: '2:14 AM',
+      text: 'Hi Alisa — sorry you’re in pain, that’s miserable at this hour.\n\nWe have three slots tomorrow: 10:30 AM, 1:00 PM or 4:45 PM. Which suits you?' },
+    { who: 'me',  wait: 1600, ts: '2:15 AM', text: '10:30 please' },
+    { who: 'bot', wait: 1100, ts: '2:15 AM',
+      text: 'Is that for emergency pain relief, or a routine check-up?' },
+    { who: 'me',  wait: 1400, ts: '2:15 AM', text: 'Pain relief' },
+    { who: 'bot', wait: 1600, ts: '2:15 AM',
+      text: '✅ Booked — Tue 22 Sep, 10:30 AM\nDr. Sana · Emergency pain relief (30 min)\nABC Dental, Blue Area\n\nReply RESCHEDULE or CANCEL any time. I’ll send you a reminder at 9:00 AM.' }
+  ];
+
+  let timers = [];
+  let running = false;
+
+  function clear() {
+    timers.forEach(clearTimeout);
+    timers = [];
+    Array.prototype.slice.call(box.querySelectorAll('.bub, .typing')).forEach(n => n.remove());
+  }
+  function hold(ms) {
+    return new Promise(res => { timers.push(setTimeout(res, ms)); });
+  }
+  function bubble(m) {
+    const b = document.createElement('div');
+    b.className = 'bub ' + (m.who === 'me' ? 'me' : 'them');
+    b.textContent = m.text;
+    const t = document.createElement('span');
+    t.className = 'ts';
+    t.textContent = m.ts;
+    if (m.who === 'me') {
+      const tick = document.createElement('span');
+      tick.className = 'tick';
+      tick.textContent = ' ✓✓';
+      t.appendChild(tick);
+    }
+    b.appendChild(t);
+    box.appendChild(b);
+    box.scrollTop = box.scrollHeight;
+  }
+
+  async function run() {
+    if (running) return;
+    running = true;
+    clear();
+    for (const m of SCRIPT) {
+      await hold(m.wait);
+      if (!running) return;
+      if (m.who === 'bot') {
+        const dots = document.createElement('div');
+        dots.className = 'typing';
+        dots.innerHTML = '<i></i><i></i><i></i>';
+        box.appendChild(dots);
+        box.scrollTop = box.scrollHeight;
+        await hold(900);
+        dots.remove();
+        if (!running) return;
+      }
+      bubble(m);
+    }
+    await hold(5400);
+    if (!running) return;
+    running = false;
+    run();
+  }
+
+  if (reduced) { SCRIPT.forEach(bubble); return; }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { run(); }
+      else { running = false; clear(); }
+    }, { threshold: 0.25 }).observe(box);
+  } else {
+    run();
+  }
+}
+
 terrain();
+chatDemo();
 tilt();
 reveal();
 chrome();
